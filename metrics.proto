@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package metrics;
+
+import "github.com/TuneLab/go-truss/deftree/googlethirdparty/annotations.proto";
+
+service Metrics {
+  // Fast responds fast
+  rpc Fast (Empty) returns (Empty) {
+    option (google.api.http) = {
+        get: "/fast"
+      };
+  }
+
+  // Slow responds slow
+  rpc Slow (Empty) returns (Empty) {
+    option (google.api.http) = {
+        post: "/slow"
+      };
+  }
+
+  // RandomError produces errors sometimes
+  rpc RandomError (Empty) returns (Empty) {
+    option (google.api.http) = {
+        post: "/randomerror"
+      };
+  }
+}
+
+message Empty {}
